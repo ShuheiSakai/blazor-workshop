@@ -19,7 +19,10 @@ namespace BlazingPizza.Client
                 .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
             builder.Services.AddScoped<OrderState>();
 
-            builder.Services.AddApiAuthorization();
+            builder.Services.AddApiAuthorization<PizzaAuthenticationState>(options =>
+            {
+                options.AuthenticationPaths.LogOutSucceededPath = "";
+            });
 
             await builder.Build().RunAsync();
         }
